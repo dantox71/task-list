@@ -8,5 +8,10 @@
     <li>CSS3</li>
     <li>JavaScript</li>
   </ul>
+  
+  Bugs:
+  <ul>
+  <li>If there are 2 tasks with the same name and user delete one of them, they both will be deleted.</li>
+  </ul>
 
 
