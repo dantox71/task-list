@@ -4,11 +4,13 @@ const taskInput = document.querySelector("#task");
 const addBtn = document.querySelector(".add");
 const taskList = document.querySelector(".task-list");
 const clearButton = document.querySelector(".clear-tasks");
+const filterInput = document.querySelector("#filter");
 //Add event listeners to DOM elements.
 function addEventListeners() {
   taskForm.addEventListener("submit", addTask);
   taskList.addEventListener("click", deleteTask);
   clearButton.addEventListener("click", clearTasks);
+  filterInput.addEventListener("keyup", filterTasks);
 }
 
 addEventListeners();
@@ -16,24 +18,29 @@ addEventListeners();
 //Add task
 function addTask(e) {
   let taskValue = taskInput.value;
-  //Create li
-  const li = document.createElement("li");
-  li.classList.add("task-item");
-  //Append value given by user to li
-  li.appendChild(document.createTextNode(taskValue));
 
-  //Create link
-  const link = document.createElement("a");
-  link.classList.add("delete-item");
-  link.innerHTML = '<i class="fa fa-remove fa-2x"></i>';
-  li.appendChild(link);
-  taskList.appendChild(li);
+  if (taskValue == "") {
+    alert("Enter task!");
+  } else {
+    //Create li
+    const li = document.createElement("li");
+    li.classList.add("task-item");
+    //Append value given by user to li
+    li.appendChild(document.createTextNode(taskValue));
 
-  //Clear input
-  taskInput.value = "";
+    //Create link
+    const link = document.createElement("a");
+    link.classList.add("delete-item");
+    link.innerHTML = '<i class="fa fa-remove fa-2x"></i>';
+    li.appendChild(link);
+    taskList.appendChild(li);
 
-  //Prevent form from submitting
-  e.preventDefault();
+    //Clear input
+    taskInput.value = "";
+
+    //Prevent form from submitting
+    e.preventDefault();
+  }
 }
 
 //Delete Task
@@ -47,6 +54,23 @@ function deleteTask(e) {
 
 function clearTasks() {
   if (confirm("Are you sure?")) {
-    taskList.innerHTML = "";
+    while (taskList.firstChild) {
+      taskList.firstChild.remove();
+    }
+    // taskList.innerHTML = "";
   }
+}
+
+function filterTasks() {
+  let text = filterInput.value;
+  const tasks = document.querySelectorAll("li");
+  console.log(text);
+
+  tasks.forEach(function(task) {
+    if (task.textContent.indexOf(text) > -1) {
+      task.style.display = "flex";
+    } else {
+      task.style.display = "none";
+    }
+  });
 }
