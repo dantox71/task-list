@@ -2,16 +2,21 @@
 <h3>Simple application that allows you to plan your tasks smarter.</h3>
   
   
- Technologies:
+ <h3>Technologies":</h3>
    <ul>
     <li>HTML5</li>
     <li>CSS3</li>
     <li>JavaScript</li>
   </ul>
-  
-  Bugs:
+
+  <h3>Features:</h3>
   <ul>
-  <li>If there are 2 tasks with the same name and user delete one of them, they both will be deleted.</li>
+    <li>Adding tasks</li>
+    <li>Removing tasks</li>
+    <li>Filtering tasks</li>
   </ul>
+
+  
+
 
 

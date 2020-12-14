@@ -21,14 +21,19 @@ function loadFromLocalStorage() {
   if (tasks !== null) {
     tasks.forEach(function(task) {
       li = document.createElement("li");
+
       li.classList.add("task-item");
-      //Append value given by user to li
+
       li.appendChild(document.createTextNode(task));
-      //Create link
+      
       const link = document.createElement("a");
+      
       link.classList.add("delete-item");
+      
       link.innerHTML = '<i class="fa fa-remove fa-2x"></i>';
+      
       li.appendChild(link);
+      
       taskList.appendChild(li);
     });
   }
@@ -37,24 +42,27 @@ function loadFromLocalStorage() {
 //Add task
 function addTask(e) {
   let taskValue = taskInput.value;
-  //Make input lowercase
+
   taskValue = taskValue.toLowerCase();
 
   //Check if entered value isn't empty
   if (taskValue == "") {
     alert("Enter task!");
   } else {
-    //Create li
     const li = document.createElement("li");
+   
     li.classList.add("task-item");
-    //Append value given by user to li
+   
     li.appendChild(document.createTextNode(taskValue));
 
-    //Create link
     const link = document.createElement("a");
+    
     link.classList.add("delete-item");
+    
     link.innerHTML = '<i class="fa fa-remove fa-2x"></i>';
+    
     li.appendChild(link);
+    
     taskList.appendChild(li);
 
     saveToLocalStorage(taskValue);
@@ -77,23 +85,21 @@ function saveToLocalStorage(task) {
     tasks = JSON.parse(tasks);
   }
   tasks.push(task);
+
   tasks = JSON.stringify(tasks);
 
   localStorage.setItem("tasks", tasks);
 }
 
-//Delete Task
 function deleteTask(e) {
   if (e.target.classList.contains("fa")) {
     if (confirm("Are  you sure?")) {
       e.target.parentElement.parentElement.remove();
     }
-
     deleteFromLocalStorage(e.target.parentElement.parentElement.textContent);
   }
 }
 
-//Delete task from local storage
 function deleteFromLocalStorage(taskValue) {
   tasks = localStorage.getItem("tasks");
 
@@ -102,6 +108,7 @@ function deleteFromLocalStorage(taskValue) {
   tasks.forEach(function(task) {
     if (task == taskValue) {
       let index = tasks.indexOf(task);
+      
       tasks.splice(index, 1);
     }
   });
